@@ -1,0 +1,25 @@
+{
+  "name": "buildprojectapi",
+  "version": "1.0.0",
+  "description": "This is an app that used for managing the student's project in every periods",
+  "main": "server.js",
+  "scripts": {
+    "test": "No test"
+  },
+  "keywords": [
+    "CRUD",
+    "Operation",
+    "students",
+    "management",
+    "system"
+  ],
+  "author": "Trong Anh",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase": "^11.4.0",
+    "mysql2": "^3.12.0"
+  }
+}
