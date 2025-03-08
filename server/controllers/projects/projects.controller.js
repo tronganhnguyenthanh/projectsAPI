@@ -34,7 +34,7 @@ const deleteProject = async(req, res) => {
 const getProjectStudentPoint = async(req, res) => {
   try{
     const connection = await connectDB()
-    const sql = "SELECT students.firstName, students.lastName, projects.projectName, projects.projectDescription, projects.points FROM students INNER JOIN projects ON students.studentId=projects.studentId"
+    const sql = "SELECT projects.projectId, students.firstName, students.lastName, projects.projectName, projects.projectDescription, projects.points FROM students INNER JOIN projects ON students.studentId=projects.studentId"
     const [query] = await connection.execute(sql)
     res.json({projects:query})
   }catch(error){

@@ -4,7 +4,7 @@
   "description": "This is an app that used for managing the student's project in every periods",
   "main": "server.js",
   "scripts": {
-    "test": "No test"
+    "server":"nodemon server.js"
   },
   "keywords": [
     "CRUD",
@@ -21,6 +21,7 @@
     "express": "^4.21.2",
     "firebase": "^11.4.0",
     "mysql": "^2.18.1",
-    "mysql2": "^3.12.0"
+    "mysql2": "^3.12.0",
+    "nodemon": "^3.1.9"
   }
 }

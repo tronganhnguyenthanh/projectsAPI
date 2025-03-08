@@ -22,6 +22,19 @@ const getAllStudents = async(req, res) => {
     res.status(400).json({message:error.message})
   }
 }
+// View student by id
+const viewStudentById = async(req, res) => {
+  try{
+    const connection = await connectDB()
+    const {studentId} = req.params
+    const sql = "SELECT * FROM students WHERE studentId=?"
+    const [results] = await connection.execute(sql, [studentId])
+    const resultId = await results.find((i) => i.studentId)
+    res.json(resultId)
+  }catch(error){
+    res.status(400).json({message:error.message})
+  }
+}
 // Update student
 const updateStudent = async(req, res) => {
   try{
@@ -50,6 +63,7 @@ const deleteStudentById = async(req, res) => {
 module.exports = {
  addNewStudent,
  updateStudent,
+ viewStudentById,
  getAllStudents,
  deleteStudentById
 }
