@@ -6,6 +6,7 @@ const App = () => {
   <div className="App">
     <Routes>
       <Route path="/" element={<FormStudent/>}/>
+      <Route path="/student/list/:studentId" element={<FormStudent/>}/>
       <Route path="/new/project" element={<FormProject/>}/>
     </Routes>
   </div>

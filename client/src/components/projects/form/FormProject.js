@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
-import { Button, Card, Form, Input, message, Popconfirm, Select, Table } from "antd"
+import React, {useEffect, useState} from "react"
+import {Button, Card, Form, Input, message, Popconfirm, Select, Table} from "antd"
 import axios from "axios"
-import { toast, ToastContainer } from "react-toastify"
+import {toast, ToastContainer} from "react-toastify"
 const FormProject = () => {
   const [students, setStudents] = useState([])
   const [value, setValue] = useState("")
@@ -10,7 +10,7 @@ const FormProject = () => {
   const [points, setPoints] = useState("")
   const [projectList, setProjectList] = useState([])
   const getAllProjects = async () => {
-   let res = await axios.get("http://localhost:1725/api/student-project/list")
+   let res = await axios.get("http://localhost:8000/api/student-project/list")
    setProjectList(res.data.projects)
   }
   useEffect(() => {
@@ -20,7 +20,7 @@ const FormProject = () => {
     getAllStudentsInProjects()
   }, [])
   const getAllStudentsInProjects = async () => {
-    let res = await axios.get("http://localhost:1725/api/students/list")
+    let res = await axios.get("http://localhost:8000/api/students/list")
     setStudents(res.data.students)
   }
   const handleOnChange = (value) => {
@@ -49,13 +49,13 @@ const FormProject = () => {
        projectDescription:projectDescription,
        points:points
       }
-      let res = await axios.post("http://localhost:1725/api/new/project", newProject)
+      let res = await axios.post("http://localhost:8000/api/new/project", newProject)
       toast.success(res.data.message, {position:"top-center"})
       getAllProjects()
     }
   }
   const confirm = async (projectId) => {
-    let res = await axios.delete(`http://localhost:1725/api/project/delete/${projectId}`)
+    let res = await axios.delete(`http://localhost:8000/api/project/delete/${projectId}`)
     toast.success(res.data.message, {position:"top-center"})
     setProjectName("")
     setProjectDescription("")

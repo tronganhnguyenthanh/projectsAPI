@@ -25,7 +25,7 @@ const FormStudent = () => {
       firstName:firstName,
       lastName:lastName
      }
-     let res = await axios.post("http://localhost:1725/api/new/student", newStudent)
+     let res = await axios.post("http://localhost:8000/api/new/student", newStudent)
      toast.success(res.data.message, {position:"top-center"})
      window.location.reload(false)
    }
