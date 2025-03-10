@@ -11,15 +11,14 @@ const ListStudents = () => {
   useEffect(() => {
    getAllStudents()
   },[])
-
   const getAllStudents = async () => {
    let res = await axios.get("http://localhost:8000/api/students/list")
    setDataSource(res.data.students)
   }
   const deleteStudent = async (studentId) => {
-    try {
+    try{
       let res = await axios.delete(`http://localhost:8000/api/student/delete/${studentId}`)
-      toast.success(res.data.message, { position: "top-center" })
+      toast.success(res.data.message, {position:"top-center"})
       getAllStudents()
     }catch(error){
       toast.error(error.response.data.message, { position: "top-center" })
@@ -82,7 +81,7 @@ const ListStudents = () => {
         ):(
           <>
             <Button onClick={() => edit(record)} style={{marginRight:8}}>Edit</Button>
-            <Button style={{ backgroundColor: "red", color: "#fff", border: "none" }} onClick={() => deleteStudent(record.studentId)}>
+            <Button style={{backgroundColor:"red", color:"#fff", border:"none"}} onClick={() => deleteStudent(record.studentId)}>
               Delete
             </Button>
           </>

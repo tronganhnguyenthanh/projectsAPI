@@ -20,6 +20,18 @@ const getAllProjects = async (req, res) => {
      res.status(400).json({message:error.message})
    }
 }
+const updateProject = async(req, res) => {
+  try{
+    const {projectId} = req.params
+    const {projectName, projectDescription} = req.body
+    const connection = await connectDB()
+    const sql = "UPDATE projects SET projectName=?, projectDescription=? WHERE projectId=?"
+    await connection.execute(sql, [projectName, projectDescription, projectId])
+    res.status(200).json({message:"Project updated successfuly"})
+  }catch(error){
+    res.status(400).json({message:error.message})
+  }
+}
 const deleteProject = async(req, res) => {
   try{
     const {projectId} = req.params
@@ -44,6 +56,7 @@ const getProjectStudentPoint = async(req, res) => {
 module.exports = {
  addNewProject,
  getAllProjects,
+ updateProject,
  deleteProject,
  getProjectStudentPoint
 }

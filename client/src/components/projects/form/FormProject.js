@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react"
 import {Button, Card, Form, Input, message, Popconfirm, Select, Table} from "antd"
+import {ArrowLeftOutlined} from "@ant-design/icons"
 import axios from "axios"
 import {toast, ToastContainer} from "react-toastify"
+import {useNavigate} from "react-router-dom"
 const FormProject = () => {
   const [students, setStudents] = useState([])
   const [value, setValue] = useState("")
@@ -9,6 +11,7 @@ const FormProject = () => {
   const [projectDescription, setProjectDescription] = useState("")
   const [points, setPoints] = useState("")
   const [projectList, setProjectList] = useState([])
+  const navigate = useNavigate()
   const getAllProjects = async () => {
    let res = await axios.get("http://localhost:8000/api/student-project/list")
    setProjectList(res.data.projects)
@@ -17,14 +20,14 @@ const FormProject = () => {
    getAllProjects()
   },[])
   useEffect(() => {
-    getAllStudentsInProjects()
-  }, [])
+   getAllStudentsInProjects()
+  },[])
   const getAllStudentsInProjects = async () => {
-    let res = await axios.get("http://localhost:8000/api/students/list")
-    setStudents(res.data.students)
+   let res = await axios.get("http://localhost:8000/api/students/list")
+   setStudents(res.data.students)
   }
   const handleOnChange = (value) => {
-    setValue(value)
+   setValue(value)
   }
   const handleAddProject = async () => {
     if(value === ""){
@@ -103,29 +106,34 @@ const FormProject = () => {
       render: (text) => <p style={{color:"gray", cursor:"pointer"}}>{Math.floor(text)}</p>
     },
     {
-      title: "Action",
-      key: "action",
-      align: "center",
+      title:"Action",
+      key:"action",
+      align:"center",
       render: (_, project) => (
-        <Popconfirm 
-          title="Delete this project" 
-          description="Are you sure to delete this one?"
-          onConfirm={() => confirm(project.projectId)}
-          onCancel={cancel}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Button htmlType="button" style={{backgroundColor:"red", color:"#fff", border:"none"}}>
-            Delete
-          </Button>
-        </Popconfirm>
+        <>
+         <Popconfirm 
+           title="Delete this project" 
+           description="Are you sure to delete this one?"
+           onConfirm={() => confirm(project.projectId)}
+           onCancel={cancel}
+           okText="Yes"
+           cancelText="No"
+         >
+          <div style={{display:"flex"}}>
+           <Button htmlType="button" style={{backgroundColor:"red", color:"#fff", border:"none", margin:"10px"}}>
+             Delete
+           </Button>
+          </div>
+         </Popconfirm>
+        </>
       )
     }
   ]
   return (
     <>
       <ToastContainer />
-      <Card style={{ width: "55%", margin: "auto", marginTop: "10px" }}>
+      <ArrowLeftOutlined style={{cursor:"pointer", color:"gray"}} onClick={() => navigate("/")}/>
+      <Card style={{width:"55%", margin:"auto", marginTop:"10px"}}>
         <Form labelCol={{ span: 8 }} wrapperCol={{ span: 16 }} style={{ maxWidth: 600 }}>
           <Form.Item label="StudentId">
             <Select onChange={handleOnChange}>
@@ -152,7 +160,7 @@ const FormProject = () => {
         </Form>
       </Card>
       <Table
-        style={{ marginTop: "10px" }}
+        style={{marginTop:"10px"}}
         dataSource={projectList}
         columns={columns}
       />

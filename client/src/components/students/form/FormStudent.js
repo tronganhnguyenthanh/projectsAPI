@@ -6,7 +6,7 @@ import ListStudents from "../lists/ListStudents"
 const FormStudent = () => {
   const [studentId, setStudentId] = useState("")
   const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")  
+  const [lastName, setLastName] = useState("")
   const addNewStudent = async() => {
    if(studentId === ""){
     toast.error("Please enter your studentId", {position:"top-center"})
